@@ -6,11 +6,11 @@ This document lists all tasks required to complete the Social Media Feed Backend
 
 ## Phase 1: Project Initialization
 
-- [ ] Install Python 3.11 and set up a virtual environment
-- [ ] Install Django 5.2 and create a new Django project
-- [ ] Configure PostgreSQL 15.x and connect it to Django
-- [ ] Initialize Git repository and make the first commit
-- [ ] Create project folder structure:
+- [x] Install Python 3.11 and set up a virtual environment
+- [x] Install Django 5.2 and create a new Django project
+- [x] Configure PostgreSQL 15.x and connect it to Django
+- [x] Initialize Git repository and make the first commit
+- [x] Create project folder structure:
   - backend/
   - apps/users/
   - apps/posts/
@@ -20,18 +20,18 @@ This document lists all tasks required to complete the Social Media Feed Backend
   - Dockerfile
   - docker-compose.yml
   - README.md
-- [ ] Set up Docker + Docker Compose for local development
+- [x] Set up Docker + Docker Compose for local development
 
 ---
 
 ## Phase 2: Core Models and Database Design
 
-- [ ] Design User model (custom user if needed)
-- [ ] Design Post model
-- [ ] Design Comment model (nested/self-referencing for replies)
-- [ ] Design Interaction model (likes and shares)
-- [ ] Design Analytics model (aggregate counts for posts/interactions)
-- [ ] Run migrations and verify database schema
+- [x] Design User model (custom user if needed)
+- [x] Design Post model
+- [x] Design Comment model (nested/self-referencing for replies)
+- [x] Design Interaction model (likes and shares)
+- [x] Design Analytics model (aggregate counts for posts/interactions)
+- [x] Run migrations and verify database schema
 - [ ] Seed the database with test users and posts
 
 ---
