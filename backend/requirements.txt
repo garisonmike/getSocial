@@ -3,3 +3,4 @@ psycopg2-binary>=2.9
 python-dotenv>=1.0
 graphene-django>=3.0
 django-graphql-jwt>=0.4
+Pillow>=10.0.0
