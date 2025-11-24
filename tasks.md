@@ -1,25 +1,31 @@
-# Social Media Feed Backend - Tasks
+# Social Media Feed Backend - To-Do List
 
-This file tracks the progress of tasks for the Social Media Feed Backend project. Tasks are divided into two sections: **Done** and **Not Yet Done**.I'll move tasks to **Done** as i complete them.
-
----
-
-## ✅ Done
-*No tasks completed yet.*
+This document lists all tasks required to complete the Social Media Feed Backend project, from project initialization to deployment, testing, and automation. Tasks are organized in sequential order for efficient development.
 
 ---
 
-## ⏳ Not Yet Done
+## Phase 1: Project Initialization
 
-### Phase 1: Project Initialization
 - [ ] Install Python 3.11 and set up a virtual environment
 - [ ] Install Django 5.2 and create a new Django project
 - [ ] Configure PostgreSQL 15.x and connect it to Django
 - [ ] Initialize Git repository and make the first commit
-- [ ] Create project folder structure
+- [ ] Create project folder structure:
+  - backend/
+  - apps/users/
+  - apps/posts/
+  - apps/interactions/
+  - apps/analytics/
+  - requirements.txt
+  - Dockerfile
+  - docker-compose.yml
+  - README.md
 - [ ] Set up Docker + Docker Compose for local development
 
-### Phase 2: Core Models and Database Design
+---
+
+## Phase 2: Core Models and Database Design
+
 - [ ] Design User model (custom user if needed)
 - [ ] Design Post model
 - [ ] Design Comment model (nested/self-referencing for replies)
@@ -28,59 +34,99 @@ This file tracks the progress of tasks for the Social Media Feed Backend project
 - [ ] Run migrations and verify database schema
 - [ ] Seed the database with test users and posts
 
-### Phase 3: Authentication and Permissions
+---
+
+## Phase 3: Authentication and Permissions
+
 - [ ] Install and configure `django-graphql-jwt`
 - [ ] Implement JWT authentication
 - [ ] Create user registration and login mutations
 - [ ] Implement role-based permissions for different user types
 - [ ] Test authentication using GraphQL Playground
 
-### Phase 4: GraphQL API Implementation
+---
+
+## Phase 4: GraphQL API Implementation
+
 - [ ] Install Graphene-Django and configure GraphQL endpoint
-- [ ] Implement Queries: fetch posts, comments (nested), interactions per post
-- [ ] Implement Mutations: create/update/delete posts, comments/replies, like/unlike/share posts
-- [ ] Implement Subscriptions: new post, new comment, new interaction
+- [ ] Implement Queries:
+  - Fetch posts (single & list)
+  - Fetch comments (nested)
+  - Fetch interactions per post
+- [ ] Implement Mutations:
+  - Create, update, delete posts
+  - Create comments and replies
+  - Like, unlike, and share posts
+- [ ] Implement Subscriptions for real-time updates:
+  - New post
+  - New comment
+  - New interaction
 - [ ] Test all queries, mutations, and subscriptions in GraphQL Playground
 
-### Phase 5: Background Tasks
+---
+
+## Phase 5: Background Tasks
+
 - [ ] Install Celery and configure RabbitMQ
-- [ ] Create tasks for notifications, analytics updates, scheduled cleanup/caching
+- [ ] Create tasks for:
+  - Sending notifications for interactions
+  - Updating analytics counters
+  - Scheduled cleanup or caching tasks
 - [ ] Test background tasks locally
 - [ ] Ensure tasks scale properly with high interaction volume
 
-### Phase 6: Analytics & Metrics
+---
+
+## Phase 6: Analytics & Metrics
+
 - [ ] Implement aggregation for likes, shares, comments
 - [ ] Add queries/mutations for analytics reporting
 - [ ] Optimize queries for performance
 - [ ] Optional: create top posts / most active users endpoint
 
-### Phase 7: Testing
+---
+
+## Phase 7: Testing
+
 - [ ] Write unit tests for models
 - [ ] Write unit and integration tests for GraphQL queries and mutations
 - [ ] Test authentication and permission rules
 - [ ] Test background tasks
 - [ ] Test real-time subscriptions
 
-### Phase 8: CI/CD and Automation
+---
+
+## Phase 8: CI/CD and Automation
+
 - [ ] Configure GitHub Actions for automated testing on push/PR
 - [ ] Add linting and code formatting checks (flake8 / black)
 - [ ] Set up Docker build automation
-- [ ] Automate deployment steps
-- [ ] Verify containerized deployment works with all services
+- [ ] Automate deployment steps (push to staging/production)
+- [ ] Verify containerized deployment works with all services (Django, PostgreSQL, RabbitMQ, Celery)
 
-### Phase 9: Documentation
+---
+
+## Phase 9: Documentation
+
 - [ ] Update README.md with project overview, API usage, and setup instructions
+- [ ] Create Planning.md and To-Do List for project reference
 - [ ] Document GraphQL schema and available queries/mutations/subscriptions
 - [ ] Add notes on background tasks and analytics
 
-### Phase 10: Deployment
+---
+
+## Phase 10: Deployment
+
 - [ ] Prepare production-ready Docker images
 - [ ] Deploy backend with PostgreSQL and RabbitMQ in containers
 - [ ] Configure environment variables for secrets (JWT keys, DB credentials)
 - [ ] Test all endpoints in production environment
 - [ ] Validate real-time subscriptions and background tasks
 
-### Phase 11: Final Review and Submission
+---
+
+## Phase 11: Final Review and Submission
+
 - [ ] Conduct final testing and debugging
 - [ ] Ensure code quality and proper version control
 - [ ] Prepare demo video of API functionality
