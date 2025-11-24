@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=nexus_db
+      - POSTGRES_USER=nexus_user
+      - POSTGRES_PASSWORD=nexus_password
+    ports:
+      - "5432:5432"
+
+  web:
+    build: ./backend
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=dev_secret_key
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=nexus_db
+      - DB_USER=nexus_user
+      - DB_PASSWORD=nexus_password
+      - DB_HOST=db
+      - DB_PORT=5432
+
+volumes:
+  postgres_data:
