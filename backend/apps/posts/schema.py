@@ -1,6 +1,5 @@
 import graphene
 from graphene_django import DjangoObjectType
-from graphql_jwt.decorators import login_required
 from .models import Post, Comment
 
 class PostType(DjangoObjectType):
@@ -18,17 +17,14 @@ class CreatePost(graphene.Mutation):
 
     class Arguments:
         content = graphene.String(required=True)
-        is_published = graphene.Boolean()
+        image = graphene.String()
 
-    @login_required
-    def mutate(self, info, content, is_published=True):
+    def mutate(self, info, content, image=None):
         user = info.context.user
-        post = Post(
-            author=user,
-            content=content,
-            is_published=is_published
-        )
-        post.save()
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
+        
+        post = Post.objects.create(author=user, content=content, image=image)
         return CreatePost(post=post)
 
 class CreateComment(graphene.Mutation):
@@ -39,34 +35,41 @@ class CreateComment(graphene.Mutation):
         content = graphene.String(required=True)
         parent_id = graphene.ID()
 
-    @login_required
     def mutate(self, info, post_id, content, parent_id=None):
         user = info.context.user
-        post = Post.objects.get(pk=post_id)
-        
+        if not user.is_authenticated:
+            raise Exception("Authentication credentials were not provided")
+
+        try:
+            post = Post.objects.get(pk=post_id)
+        except Post.DoesNotExist:
+            raise Exception("Post not found")
+
         parent = None
         if parent_id:
-            parent = Comment.objects.get(pk=parent_id)
+            try:
+                parent = Comment.objects.get(pk=parent_id)
+            except Comment.DoesNotExist:
+                raise Exception("Parent comment not found")
 
-        comment = Comment(
+        comment = Comment.objects.create(
             author=user,
             post=post,
             content=content,
             parent=parent
         )
-        comment.save()
         return CreateComment(comment=comment)
+
+class Query(graphene.ObjectType):
+    all_posts = graphene.List(PostType)
+    post_by_id = graphene.Field(PostType, id=graphene.Int(required=True))
+
+    def resolve_all_posts(self, info):
+        return Post.objects.all()
+
+    def resolve_post_by_id(self, info, id):
+        return Post.objects.get(pk=id)
 
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_comment = CreateComment.Field()
-
-class Query(graphene.ObjectType):
-    posts = graphene.List(PostType)
-    post = graphene.Field(PostType, id=graphene.Int())
-
-    def resolve_posts(self, info):
-        return Post.objects.filter(is_published=True)
-
-    def resolve_post(self, info, id):
-        return Post.objects.get(pk=id)

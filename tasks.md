@@ -48,12 +48,12 @@ This document lists all tasks required to complete the Social Media Feed Backend
 
 ## Phase 4: GraphQL API Implementation
 
-- [ ] Install Graphene-Django and configure GraphQL endpoint
-- [ ] Implement Queries:
+- [x] Install Graphene-Django and configure GraphQL endpoint
+- [x] Implement Queries:
   - Fetch posts (single & list)
   - Fetch comments (nested)
   - Fetch interactions per post
-- [ ] Implement Mutations:
+- [x] Implement Mutations:
   - Create, update, delete posts
   - Create comments and replies
   - Like, unlike, and share posts
