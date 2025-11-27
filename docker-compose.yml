@@ -12,6 +12,17 @@ services:
     ports:
       - "5432:5432"
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5673:5672"
+      - "15673:15672"
+
   web:
     build: ./backend
     command: python manage.py runserver 0.0.0.0:8000
@@ -21,6 +32,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+      - redis
+      - rabbitmq
     environment:
       - DEBUG=1
       - SECRET_KEY=dev_secret_key
@@ -31,6 +44,30 @@ services:
       - DB_PASSWORD=nexus_password
       - DB_HOST=db
       - DB_PORT=5432
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - REDIS_URL=redis://redis:6379/0
+
+  celery:
+    build: ./backend
+    command: celery -A config worker --loglevel=info
+    volumes:
+      - ./backend:/app
+    depends_on:
+      - web
+      - rabbitmq
+      - redis
+    environment:
+      - DEBUG=1
+      - SECRET_KEY=dev_secret_key
+      - DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]
+      - DB_ENGINE=django.db.backends.postgresql
+      - DB_NAME=nexus_db
+      - DB_USER=nexus_user
+      - DB_PASSWORD=nexus_password
+      - DB_HOST=db
+      - DB_PORT=5432
+      - CELERY_BROKER_URL=amqp://guest:guest@rabbitmq:5672//
+      - REDIS_URL=redis://redis:6379/0
 
 volumes:
   postgres_data:

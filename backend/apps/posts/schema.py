@@ -1,6 +1,8 @@
 import graphene
 from graphene_django import DjangoObjectType
 from .models import Post, Comment
+from apps.interactions.tasks import send_comment_notification
+import channels_graphql_ws
 
 class PostType(DjangoObjectType):
     class Meta:
@@ -25,6 +27,10 @@ class CreatePost(graphene.Mutation):
             raise Exception("Authentication credentials were not provided")
         
         post = Post.objects.create(author=user, content=content, image=image)
+        
+        # Notify subscribers
+        OnNewPost.broadcast(payload=post)
+        
         return CreatePost(post=post)
 
 class CreateComment(graphene.Mutation):
@@ -58,7 +64,30 @@ class CreateComment(graphene.Mutation):
             content=content,
             parent=parent
         )
+        
+        # Trigger background task
+        # In a real app, we'd get the post author's email
+        post_author_email = post.author.email if post.author.email else "unknown@example.com"
+        send_comment_notification.delay(comment.id, post_author_email)
+
         return CreateComment(comment=comment)
+
+class OnNewPost(channels_graphql_ws.Subscription):
+    """Subscription that triggers when a new post is created."""
+    post = graphene.Field(PostType)
+
+    def subscribe(self, info):
+        """Return the list of subscription groups."""
+        return ["new_posts"]
+
+    def publish(self, info, post=None):
+        """Called when the subscription is triggered."""
+        return OnNewPost(post=post)
+
+    @classmethod
+    def broadcast(cls, payload):
+        """Helper to trigger the subscription."""
+        super().broadcast(group="new_posts", payload=payload)
 
 class Query(graphene.ObjectType):
     all_posts = graphene.List(PostType)
@@ -73,3 +102,6 @@ class Query(graphene.ObjectType):
 class Mutation(graphene.ObjectType):
     create_post = CreatePost.Field()
     create_comment = CreateComment.Field()
+
+class Subscription(graphene.ObjectType):
+    on_new_post = OnNewPost.Field()
