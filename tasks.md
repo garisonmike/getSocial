@@ -57,21 +57,21 @@ This document lists all tasks required to complete the Social Media Feed Backend
   - Create, update, delete posts
   - Create comments and replies
   - Like, unlike, and share posts
-- [ ] Implement Subscriptions for real-time updates:
-  - New post
-  - New comment
-  - New interaction
+- [x] Implement Subscriptions for real-time updates:
+  - [x] New post
+  - [ ] New comment
+  - [ ] New interaction
 - [ ] Test all queries, mutations, and subscriptions in GraphQL Playground
 
 ---
 
 ## Phase 5: Background Tasks
 
-- [ ] Install Celery and configure RabbitMQ
-- [ ] Create tasks for:
-  - Sending notifications for interactions
-  - Updating analytics counters
-  - Scheduled cleanup or caching tasks
+- [x] Install Celery and configure RabbitMQ
+- [x] Create tasks for:
+  - [x] Sending notifications for interactions
+  - [ ] Updating analytics counters
+  - [ ] Scheduled cleanup or caching tasks
 - [ ] Test background tasks locally
 - [ ] Ensure tasks scale properly with high interaction volume
 
