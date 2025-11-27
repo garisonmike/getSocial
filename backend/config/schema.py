@@ -2,8 +2,13 @@ import graphene
 import apps.users.schema
 import apps.posts.schema
 import apps.interactions.schema
+import apps.analytics.schema
 
-class Query(apps.posts.schema.Query, graphene.ObjectType):
+class Query(
+    apps.posts.schema.Query,
+    apps.analytics.schema.Query,
+    graphene.ObjectType
+):
     pass
 
 class Mutation(

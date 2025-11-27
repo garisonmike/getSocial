@@ -79,9 +79,9 @@ This document lists all tasks required to complete the Social Media Feed Backend
 
 ## Phase 6: Analytics & Metrics
 
-- [ ] Implement aggregation for likes, shares, comments
-- [ ] Add queries/mutations for analytics reporting
-- [ ] Optimize queries for performance
+- [x] Implement aggregation for likes, shares, comments
+- [x] Add queries/mutations for analytics reporting
+- [x] Optimize queries for performance
 - [ ] Optional: create top posts / most active users endpoint
 
 ---
