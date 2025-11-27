@@ -38,9 +38,9 @@ This document lists all tasks required to complete the Social Media Feed Backend
 
 ## Phase 3: Authentication and Permissions
 
-- [ ] Install and configure `django-graphql-jwt`
-- [ ] Implement JWT authentication
-- [ ] Create user registration and login mutations
+- [x] Install and configure `django-graphql-jwt`
+- [x] Implement JWT authentication
+- [x] Create user registration and login mutations
 - [ ] Implement role-based permissions for different user types
 - [ ] Test authentication using GraphQL Playground
 
