@@ -88,9 +88,9 @@ This document lists all tasks required to complete the Social Media Feed Backend
 
 ## Phase 7: Testing
 
-- [ ] Write unit tests for models
-- [ ] Write unit and integration tests for GraphQL queries and mutations
-- [ ] Test authentication and permission rules
+- [x] Write unit tests for models
+- [x] Write unit and integration tests for GraphQL queries and mutations
+- [x] Test authentication and permission rules
 - [ ] Test background tasks
 - [ ] Test real-time subscriptions
 
@@ -98,7 +98,7 @@ This document lists all tasks required to complete the Social Media Feed Backend
 
 ## Phase 8: CI/CD and Automation
 
-- [ ] Configure GitHub Actions for automated testing on push/PR
+- [x] Configure GitHub Actions for automated testing on push/PR
 - [ ] Add linting and code formatting checks (flake8 / black)
 - [ ] Set up Docker build automation
 - [ ] Automate deployment steps (push to staging/production)

@@ -6,6 +6,7 @@ from apps.posts.models import Post
 class InteractionType(DjangoObjectType):
     class Meta:
         model = Interaction
+        fields = "__all__"
 
 class LikePost(graphene.Mutation):
     ok = graphene.Boolean()

@@ -9,3 +9,5 @@ channels[daphne]>=4.0
 channels_redis>=4.1
 django-celery-results>=2.5
 django-channels-graphql-ws>=1.0.0rc7
+pytest>=7.0
+pytest-django>=4.0

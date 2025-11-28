@@ -6,6 +6,7 @@ from django.contrib.auth import get_user_model
 class UserType(DjangoObjectType):
     class Meta:
         model = get_user_model()
+        fields = "__all__"
 
 class Register(graphene.Mutation):
     user = graphene.Field(UserType)
