@@ -18,4 +18,10 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy project
-COPY . /app/
+COPY . /app/backend/
+
+# Set work directory to the project folder
+WORKDIR /app/backend
+
+# Default command
+CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "config.asgi:application"]
