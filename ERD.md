@@ -1,22 +1,24 @@
-# Entity Relationship Diagram (ERD)
+# Data Models Entity Relationship Diagram
 
 ```mermaid
 erDiagram
-    User ||--o{ Post : "creates"
+    User ||--o{ Post : "creates (author)"
     User ||--o{ Comment : "writes"
     User ||--o{ Interaction : "performs"
+    
     Post ||--o{ Comment : "has"
     Post ||--o{ Interaction : "receives"
-    Post ||--|| Analytics : "has metrics"
-    Comment ||--o{ Comment : "replies to"
+    Post ||--|| Analytics : "tracks metrics for"
+    
+    Comment ||--o{ Comment : "replies to (parent)"
 
     User {
         int id PK
         string username
         string email
         string password
-        string bio
-        string avatar
+        boolean is_staff
+        boolean is_active
     }
 
     Post {
@@ -33,8 +35,8 @@ erDiagram
         int id PK
         int post_id FK
         int author_id FK
+        int parent_id FK "Nullable"
         text content
-        int parent_id FK "Self-referencing for replies"
         datetime created_at
     }
 
@@ -42,12 +44,18 @@ erDiagram
         int id PK
         int user_id FK
         int post_id FK
-        string interaction_type "like, share"
+        string interaction_type "LIKE, SHARE"
         datetime created_at
     }
 
     Analytics {
         int id PK
+        int post_id FK "OneToOne"
+        int views
+        int likes_count
+        int shares_count
+    }
+```
         int post_id FK
         int views
         int likes_count
