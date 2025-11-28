@@ -1,15 +1,12 @@
-# Data Models Entity Relationship Diagram
-
-```mermaid
 erDiagram
     User ||--o{ Post : "creates (author)"
     User ||--o{ Comment : "writes"
     User ||--o{ Interaction : "performs"
-    
+
     Post ||--o{ Comment : "has"
     Post ||--o{ Interaction : "receives"
     Post ||--|| Analytics : "tracks metrics for"
-    
+
     Comment ||--o{ Comment : "replies to (parent)"
 
     User {
@@ -55,10 +52,3 @@ erDiagram
         int likes_count
         int shares_count
     }
-```
-        int post_id FK
-        int views
-        int likes_count
-        int shares_count
-    }
-```
