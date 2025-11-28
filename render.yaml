@@ -16,8 +16,7 @@ services:
     plan: free
     dockerContext: backend
     dockerfilePath: backend/Dockerfile
-    dockerCommand: python -m daphne -b 0.0.0.0 -p $PORT config.asgi:application
-    preDeployCommand: python manage.py migrate
+    dockerCommand: sh -c "python -m daphne -b 0.0.0.0 -p $PORT config.asgi:application"
     envVars:
       - key: SECRET_KEY
         generateValue: true
