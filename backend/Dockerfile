@@ -21,6 +21,8 @@ RUN echo '#!/bin/sh' > /start.sh && \
     echo 'set -e' >> /start.sh && \
     echo 'echo "Running migrations..."' >> /start.sh && \
     echo 'python manage.py migrate' >> /start.sh && \
+    echo 'echo "Collecting static files..."' >> /start.sh && \
+    echo 'python manage.py collectstatic --noinput' >> /start.sh && \
     echo 'echo "Starting Daphne..."' >> /start.sh && \
     echo 'daphne -b 0.0.0.0 -p $PORT config.asgi:application' >> /start.sh && \
     chmod +x /start.sh

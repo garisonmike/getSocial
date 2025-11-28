@@ -12,3 +12,4 @@ django-channels-graphql-ws>=1.0.0rc7
 pytest>=7.0
 pytest-django>=4.0
 dj-database-url>=2.1.0
+whitenoise>=6.5.0
