@@ -1,3 +1,6 @@
+# Data Models Entity Relationship Diagram
+
+```mermaid
 erDiagram
     User ||--o{ Post : "creates (author)"
     User ||--o{ Comment : "writes"
@@ -52,3 +55,4 @@ erDiagram
         int likes_count
         int shares_count
     }
+```
