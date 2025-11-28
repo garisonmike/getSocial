@@ -16,7 +16,7 @@ services:
     plan: free
     dockerContext: backend
     dockerfilePath: backend/Dockerfile
-    dockerCommand: sh -c "python -m daphne -b 0.0.0.0 -p $PORT config.asgi:application"
+    dockerCommand: daphne -b 0.0.0.0 -p $PORT config.asgi:application
     envVars:
       - key: SECRET_KEY
         generateValue: true
