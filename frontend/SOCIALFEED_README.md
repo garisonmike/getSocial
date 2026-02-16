@@ -4,14 +4,14 @@ A modern, Instagram/Twitter-style social feed component for the getSocial applic
 
 ## Features
 
-- ✨ Modern, clean UI with Tailwind CSS
-- ❤️ Optimistic like updates (instant UI feedback)
-- 🔄 Infinite scroll with "Load More" functionality
-- 📱 Responsive design
-- ⚡ Fast and smooth animations
-- 🎨 Beautiful gradient avatars for users without profile pictures
+-  Modern, clean UI with Tailwind CSS
+-  Optimistic like updates (instant UI feedback)
+-  Infinite scroll with "Load More" functionality
+-  Responsive design
+-  Fast and smooth animations
+-  Beautiful gradient avatars for users without profile pictures
 - ⏰ Smart time formatting (e.g., "2h ago", "just now")
-- 🔁 Automatic error recovery and retry logic
+-  Automatic error recovery and retry logic
 
 ## Components
 

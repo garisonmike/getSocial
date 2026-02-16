@@ -30,7 +30,7 @@ python manage.py runserver
 
 ## Your Three Required Endpoints
 
-### 1. Creating a Post ✅
+### 1. Creating a Post 
 
 **Endpoint:** `POST /api/posts/`
 
@@ -91,7 +91,7 @@ curl -X POST http://localhost:8000/api/posts/ \
 
 ---
 
-### 2. Fetching User's Feed ✅
+### 2. Fetching User's Feed 
 
 **Endpoint:** `GET /api/posts/feed/`
 
@@ -122,7 +122,7 @@ curl -X GET "http://localhost:8000/api/posts/feed/?page=1" \
       "id": 15,
       "author_username": "alice",
       "author_avatar": "http://localhost:8000/media/profiles/avatars/alice.jpg",
-      "content": "Just finished a great workout! 💪",
+      "content": "Just finished a great workout! ",
       "image": "http://localhost:8000/media/posts/images/2026/02/16/workout.jpg",
       "video": null,
       "visibility": "public",
@@ -136,7 +136,7 @@ curl -X GET "http://localhost:8000/api/posts/feed/?page=1" \
       "id": 14,
       "author_username": "bob",
       "author_avatar": "http://localhost:8000/media/profiles/avatars/bob.jpg",
-      "content": "Beautiful sunset today 🌅",
+      "content": "Beautiful sunset today ",
       "image": null,
       "video": null,
       "visibility": "followers",
@@ -154,7 +154,7 @@ curl -X GET "http://localhost:8000/api/posts/feed/?page=1" \
 
 ---
 
-### 3. Liking a Post ✅
+### 3. Liking a Post 
 
 **Endpoint:** `POST /api/posts/{post_id}/like/`
 

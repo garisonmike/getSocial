@@ -136,6 +136,7 @@ celerybeat.pid
 
 # Environments
 .env
+.env.*
 .envrc
 .venv
 env/
@@ -143,6 +144,37 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+
+# Frontend
+node_modules/
+dist/
+build/
+.next/
+.nuxt/
+.cache/
+*.local
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+Thumbs.db
+
+# Media and Static Files
+media/
+staticfiles/
+static/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # Spyder project settings
 .spyderproject

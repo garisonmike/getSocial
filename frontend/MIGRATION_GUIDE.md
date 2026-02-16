@@ -1,10 +1,10 @@
 # Migration Guide: JavaScript to TypeScript with SOLID Principles
 
-## 🎯 Overview
+##  Overview
 
 This refactoring transforms the getSocial frontend from JavaScript to TypeScript, applying SOLID principles throughout the codebase for better maintainability, type safety, and scalability.
 
-## 📦 Required Dependencies
+##  Required Dependencies
 
 Add the following to your `package.json`:
 
@@ -27,7 +27,7 @@ cd frontend
 npm install
 ```
 
-## 🏗️ Architecture Changes
+##  Architecture Changes
 
 ### 1. Type Definitions (`src/types/models.ts`)
 
@@ -81,12 +81,12 @@ abstract class BaseApiService {
 **Structure**:
 ```
 services/
-├── httpClient.ts          (Base HTTP functionality)
-├── postsApi.ts            (Posts operations)
-├── commentsApi.ts         (Comments operations)
-├── profilesApi.ts         (Profiles operations)
-├── followsApi.ts          (Follows operations)
-└── api.ts                 (Central export)
+ httpClient.ts          (Base HTTP functionality)
+ postsApi.ts            (Posts operations)
+ commentsApi.ts         (Comments operations)
+ profilesApi.ts         (Profiles operations)
+ followsApi.ts          (Follows operations)
+ api.ts                 (Central export)
 ```
 
 **Each service**:
@@ -101,20 +101,20 @@ services/
 **Structure**:
 ```
 hooks/
-├── usePosts.ts
-│   ├── usePosts()        - Fetch paginated posts
-│   ├── useFeed()         - Fetch personalized feed
-│   ├── usePost()         - Fetch single post
-│   ├── usePostLike()     - Handle like/unlike
-│   ├── usePostCreate()   - Create posts
-│   └── usePostDelete()   - Delete posts
-├── useProfile.ts
-│   ├── useMyProfile()    - Current user profile
-│   ├── useProfile()      - Fetch profile by ID
-│   └── useProfileUpdate() - Update profile
-└── useFollow.ts
-    ├── useFollow()       - Follow/unfollow with optimistic updates
-    └── useFollowActions() - Batch follow operations
+ usePosts.ts
+    usePosts()        - Fetch paginated posts
+    useFeed()         - Fetch personalized feed
+    usePost()         - Fetch single post
+    usePostLike()     - Handle like/unlike
+    usePostCreate()   - Create posts
+    usePostDelete()   - Delete posts
+ useProfile.ts
+    useMyProfile()    - Current user profile
+    useProfile()      - Fetch profile by ID
+    useProfileUpdate() - Update profile
+ useFollow.ts
+     useFollow()       - Follow/unfollow with optimistic updates
+     useFollowActions() - Batch follow operations
 ```
 
 **Benefits**:
@@ -130,12 +130,12 @@ hooks/
 **Component Hierarchy**:
 ```
 SocialFeed.tsx (Container)
-├── LoadingSpinner.tsx
-├── ErrorMessage.tsx
-├── EmptyState.tsx
-└── SocialPostCard.tsx (Presentational)
-    ├── PostAvatar.tsx
-    └── PostActions.tsx
+ LoadingSpinner.tsx
+ ErrorMessage.tsx
+ EmptyState.tsx
+ SocialPostCard.tsx (Presentational)
+     PostAvatar.tsx
+     PostActions.tsx
 ```
 
 **Key Improvements**:
@@ -154,7 +154,7 @@ const SocialFeed: React.FC<SocialFeedProps> = ({ className }) => {
 }
 ```
 
-## 🔄 Migration Steps
+##  Migration Steps
 
 ### Step 1: Install TypeScript Dependencies
 
@@ -218,7 +218,7 @@ const fetchPosts = async () => {
 const { posts, isLoading, error, loadMore, refresh } = usePosts()
 ```
 
-## 📋 SOLID Principles Applied
+##  SOLID Principles Applied
 
 ### Single Responsibility Principle (SRP)
 
@@ -294,7 +294,7 @@ const postsApi = new PostsApiService(httpClient)
 const postsApiTest = new PostsApiService(mockHttpClient)
 ```
 
-## 🎨 Usage Examples
+##  Usage Examples
 
 ### Example 1: Using the Social Feed
 
@@ -370,7 +370,7 @@ async function customFetch() {
 }
 ```
 
-## ✅ Benefits of This Refactoring
+##  Benefits of This Refactoring
 
 ### Type Safety
 ```typescript
@@ -416,7 +416,7 @@ const { result } = renderHook(() => usePosts())
 - Easy to find where changes should go
 - Types catch errors at build time
 
-## 🚀 Next Steps
+##  Next Steps
 
 1. **Install dependencies**: `npm install`
 2. **Start using TypeScript files**: Import from `.tsx` and `.ts` files
@@ -424,7 +424,7 @@ const { result } = renderHook(() => usePosts())
 4. **Add tests**: Now much easier with separated concerns
 5. **Expand**: Add new features following the same patterns
 
-## 📚 File Reference
+##  File Reference
 
 | Old File | New File | Purpose |
 |----------|----------|---------|
@@ -435,7 +435,7 @@ const { result } = renderHook(() => usePosts())
 | N/A | `utils/errorHandling.ts` | Error handling |
 | N/A | `types/models.ts` | TypeScript types |
 
-## 🎓 Learn More
+##  Learn More
 
 - [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)
 - [SOLID Principles](https://en.wikipedia.org/wiki/SOLID)

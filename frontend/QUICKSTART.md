@@ -1,6 +1,6 @@
-# 🚀 Quick Start Guide - SocialFeed Component
+#  Quick Start Guide - SocialFeed Component
 
-## ⚡ 5-Minute Setup
+##  5-Minute Setup
 
 ### 1. Start Your Servers
 
@@ -23,32 +23,32 @@ Open your browser and navigate to:
 http://localhost:3000/social
 ```
 
-That's it! 🎉
+That's it! 
 
 ---
 
-## 📸 What You'll See
+##  What You'll See
 
 ### Modern Social Feed
-- ✅ Clean, Instagram/Twitter-style cards
-- ✅ Profile avatars (or gradient placeholders)
-- ✅ Like buttons with instant feedback (❤️)
-- ✅ Comment, Share, and Bookmark buttons
-- ✅ Smart timestamps ("2h ago", "just now")
-- ✅ Smooth animations and hover effects
-- ✅ "Load More" button for pagination
+-  Clean, Instagram/Twitter-style cards
+-  Profile avatars (or gradient placeholders)
+-  Like buttons with instant feedback ()
+-  Comment, Share, and Bookmark buttons
+-  Smart timestamps ("2h ago", "just now")
+-  Smooth animations and hover effects
+-  "Load More" button for pagination
 
 ### Key Feature: Optimistic Like Updates
 When you click the like button:
 1. UI updates **instantly** (no waiting!)
 2. Like count increases immediately
-3. Button turns red ❤️
+3. Button turns red 
 4. API call happens in background
 5. If it fails, changes revert automatically
 
 ---
 
-## 🎯 Routes Available
+##  Routes Available
 
 | Route | Description |
 |-------|-------------|
@@ -60,10 +60,10 @@ When you click the like button:
 
 ---
 
-## 🧪 Quick Test
+##  Quick Test
 
 ### Test the Like Button:
-1. Click the ❤️ button on any post
+1. Click the  button on any post
 2. Notice it turns **red immediately** (optimistic update!)
 3. Like count increases by 1 instantly
 4. Click again to unlike
@@ -82,7 +82,7 @@ When you click the like button:
 
 ---
 
-## 📁 Files Created
+##  Files Created
 
 ### Components (Use These!)
 ```
@@ -110,7 +110,7 @@ src/examples/SocialFeedExamples.jsx ← 5 usage examples
 
 ---
 
-## 🎨 Usage Examples
+##  Usage Examples
 
 ### Example 1: Basic Usage
 ```jsx
@@ -150,7 +150,7 @@ function SinglePost({ post }) {
 
 ---
 
-## 🔧 Customization
+##  Customization
 
 ### Change Primary Color (Blue → Purple)
 In `SocialPostCard.jsx`, search and replace:
@@ -176,7 +176,7 @@ className="from-pink-400 to-red-500"
 
 ---
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Issue: "Posts not loading"
 **Check:**
@@ -211,7 +211,7 @@ npm run dev
 
 ---
 
-## 📚 Need More Info?
+##  Need More Info?
 
 ### Documentation Files:
 - **SOCIALFEED_README.md** - Detailed component docs
@@ -224,7 +224,7 @@ npm run dev
 
 ---
 
-## ✅ Success Checklist
+##  Success Checklist
 
 - [ ] Backend running on port 8000
 - [ ] Frontend running on port 3000
@@ -236,16 +236,16 @@ npm run dev
 
 ---
 
-## 🎉 You're Ready!
+##  You're Ready!
 
 Your SocialFeed component is fully functional and ready to use. It features:
 
-✨ **Optimistic like updates** - Instant UI feedback  
-🎨 **Modern design** - Instagram/Twitter inspired  
-📱 **Fully responsive** - Works on all devices  
-⚡ **Fast & smooth** - Optimized performance  
-🛡️ **Error handling** - Graceful error recovery  
+ **Optimistic like updates** - Instant UI feedback  
+ **Modern design** - Instagram/Twitter inspired  
+ **Fully responsive** - Works on all devices  
+ **Fast & smooth** - Optimized performance  
+ **Error handling** - Graceful error recovery  
 
 **Access it now:** http://localhost:3000/social
 
-Enjoy your new social feed! 🚀
+Enjoy your new social feed! 

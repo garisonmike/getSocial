@@ -1,4 +1,4 @@
-# 🔒 Security Configuration Guide
+#  Security Configuration Guide
 
 ## Overview
 
@@ -6,7 +6,7 @@ This document outlines the security improvements made to the getSocial Django ba
 
 ---
 
-## ✅ Security Improvements Implemented
+##  Security Improvements Implemented
 
 ### 1. **JWT Authentication Added**
 
@@ -47,7 +47,7 @@ SIMPLE_JWT = {
 - `PostViewSet`: Create/update/delete now explicitly require authentication
 - `CommentViewSet`: Create/update/delete now explicitly require authentication  
 - `ShareViewSet`: Create/delete now explicitly require authentication
-- `FollowViewSet`: Already required authentication ✅
+- `FollowViewSet`: Already required authentication 
 
 **Before:**
 ```python
@@ -77,16 +77,16 @@ class PostViewSet(viewsets.ModelViewSet):
 
 **What Changed:**
 
-**✅ Import Organization:**
+** Import Organization:**
 ```python
 import os
 from pathlib import Path
 import dj_database_url  # Moved to top
 ```
 
-**✅ ALLOWED_HOSTS Configuration:**
+** ALLOWED_HOSTS Configuration:**
 ```python
-# Before: ALLOWED_HOSTS = ["*"]  # ⚠️ Dangerous in production
+# Before: ALLOWED_HOSTS = ["*"]  #  Dangerous in production
 # After:
 ALLOWED_HOSTS = os.environ.get(
     'ALLOWED_HOSTS',
@@ -94,9 +94,9 @@ ALLOWED_HOSTS = os.environ.get(
 ).split(',')
 ```
 
-**✅ Database SSL Configuration:**
+** Database SSL Configuration:**
 ```python
-# Before: ssl_require=True  # ⚠️ Breaks development
+# Before: ssl_require=True  #  Breaks development
 # After:
 if os.environ.get('DATABASE_URL'):
     DATABASES['default'] = dj_database_url.config(
@@ -112,7 +112,7 @@ if os.environ.get('DATABASE_URL'):
 
 ---
 
-## 🔧 Required Environment Variables
+##  Required Environment Variables
 
 ### Development (.env file)
 
@@ -174,7 +174,7 @@ CELERY_BROKER_URL=amqps://user:password@your-rabbitmq-host:5672//
 
 ---
 
-## 📝 Database Configuration Priority
+##  Database Configuration Priority
 
 The system uses this priority order:
 
@@ -191,7 +191,7 @@ The system uses this priority order:
 
 ---
 
-## 🔑 Authentication Flow
+##  Authentication Flow
 
 ### For Frontend Developers
 
@@ -242,32 +242,32 @@ localStorage.removeItem('refresh_token')
 
 ---
 
-## 🛡️ API Endpoint Permissions
+##  API Endpoint Permissions
 
 | Endpoint | Method | Authentication Required | Additional Checks |
 |----------|--------|-------------------------|-------------------|
-| `/api/posts/` | GET | ❌ No (public read) | Visibility filters apply |
-| `/api/posts/` | POST | ✅ Yes | Sets current user as author |
-| `/api/posts/{id}/` | GET | ❌ No (if public) | Visibility filters apply |
-| `/api/posts/{id}/` | PUT/PATCH | ✅ Yes | Must be post author |
-| `/api/posts/{id}/` | DELETE | ✅ Yes | Must be post author |
-| `/api/posts/{id}/like/` | POST | ✅ Yes | - |
-| `/api/posts/{id}/unlike/` | POST | ✅ Yes | - |
-| `/api/posts/feed/` | GET | ✅ Yes | Personalized feed |
-| `/api/comments/` | GET | ❌ No | - |
-| `/api/comments/` | POST | ✅ Yes | Sets current user as author |
-| `/api/comments/{id}/` | PUT/PATCH | ✅ Yes | Must be comment author |
-| `/api/comments/{id}/` | DELETE | ✅ Yes | Must be comment author |
-| `/api/follows/` | GET | ✅ Yes | Only own follows |
-| `/api/follows/` | POST | ✅ Yes | Creates follow relationship |
-| `/api/follows/unfollow/` | POST | ✅ Yes | Removes follow relationship |
-| `/api/profiles/me/` | GET | ✅ Yes | Current user's profile |
-| `/api/profiles/{id}/` | GET | ❌ No (if public) | Private profiles hidden |
-| `/api/profiles/{id}/` | PUT/PATCH | ✅ Yes | Must be own profile |
+| `/api/posts/` | GET |  No (public read) | Visibility filters apply |
+| `/api/posts/` | POST |  Yes | Sets current user as author |
+| `/api/posts/{id}/` | GET |  No (if public) | Visibility filters apply |
+| `/api/posts/{id}/` | PUT/PATCH |  Yes | Must be post author |
+| `/api/posts/{id}/` | DELETE |  Yes | Must be post author |
+| `/api/posts/{id}/like/` | POST |  Yes | - |
+| `/api/posts/{id}/unlike/` | POST |  Yes | - |
+| `/api/posts/feed/` | GET |  Yes | Personalized feed |
+| `/api/comments/` | GET |  No | - |
+| `/api/comments/` | POST |  Yes | Sets current user as author |
+| `/api/comments/{id}/` | PUT/PATCH |  Yes | Must be comment author |
+| `/api/comments/{id}/` | DELETE |  Yes | Must be comment author |
+| `/api/follows/` | GET |  Yes | Only own follows |
+| `/api/follows/` | POST |  Yes | Creates follow relationship |
+| `/api/follows/unfollow/` | POST |  Yes | Removes follow relationship |
+| `/api/profiles/me/` | GET |  Yes | Current user's profile |
+| `/api/profiles/{id}/` | GET |  No (if public) | Private profiles hidden |
+| `/api/profiles/{id}/` | PUT/PATCH |  Yes | Must be own profile |
 
 ---
 
-## 🧪 Testing Authentication
+##  Testing Authentication
 
 ### Test 1: Unauthenticated User Cannot Create Post
 
@@ -312,7 +312,7 @@ curl -X PATCH http://localhost:8000/api/posts/1/ \
 
 ---
 
-## 🚀 Installation & Setup
+##  Installation & Setup
 
 ### 1. Install Dependencies
 
@@ -357,7 +357,7 @@ python manage.py runserver
 
 ---
 
-## 📋 Checklist for Production Deployment
+##  Checklist for Production Deployment
 
 - [ ] Set `DEBUG=False`
 - [ ] Generate strong `SECRET_KEY` (50+ characters)
@@ -375,7 +375,7 @@ python manage.py runserver
 
 ---
 
-## 🔐 Security Best Practices
+##  Security Best Practices
 
 1. **Never commit `.env` files to Git**
    ```bash
@@ -404,7 +404,7 @@ python manage.py runserver
 
 ---
 
-## 📚 Additional Resources
+##  Additional Resources
 
 - [Django REST Framework - Authentication](https://www.django-rest-framework.org/api-guide/authentication/)
 - [Simple JWT Documentation](https://django-rest-framework-simplejwt.readthedocs.io/)
@@ -413,7 +413,7 @@ python manage.py runserver
 
 ---
 
-## 🐛 Troubleshooting
+##  Troubleshooting
 
 ### Issue: "Authentication credentials were not provided"
 
@@ -462,16 +462,16 @@ ALLOWED_HOSTS=yourdomain.com,www.yourdomain.com
 
 ---
 
-## ✨ Summary
+##  Summary
 
 Your Django backend now has:
 
-✅ **JWT Authentication** properly configured  
-✅ **Explicit permission requirements** for create/update/delete operations  
-✅ **Secure database configuration** with environment variables  
-✅ **Proper ALLOWED_HOSTS** configuration  
-✅ **Token blacklist** support for logout  
-✅ **Ownership validation** for posts, comments, and shares  
+ **JWT Authentication** properly configured  
+ **Explicit permission requirements** for create/update/delete operations  
+ **Secure database configuration** with environment variables  
+ **Proper ALLOWED_HOSTS** configuration  
+ **Token blacklist** support for logout  
+ **Ownership validation** for posts, comments, and shares  
 
 **Next Steps:**
 1. Update your `.env` file with the variables above
@@ -480,4 +480,4 @@ Your Django backend now has:
 4. Update frontend to use JWT authentication
 5. Test all endpoints with authentication
 
-🎉 **Your API is now production-ready and secure!**
+ **Your API is now production-ready and secure!**

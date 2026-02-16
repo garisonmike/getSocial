@@ -117,7 +117,7 @@ Returns follows related to the current authenticated user.
 
 ### 3. Posts
 
-#### Create a post ✅
+#### Create a post 
 ```http
 POST /api/posts/
 ```
@@ -160,7 +160,7 @@ POST /api/posts/
 }
 ```
 
-#### Get user's feed ✅
+#### Get user's feed 
 ```http
 GET /api/posts/feed/
 ```
@@ -224,7 +224,7 @@ DELETE /api/posts/{id}/
 ```
 **Auth Required:** Yes (must be post author)
 
-#### Like a post ✅
+#### Like a post 
 ```http
 POST /api/posts/{id}/like/
 ```
