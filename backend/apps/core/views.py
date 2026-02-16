@@ -168,13 +168,22 @@ class PostViewSet(viewsets.ModelViewSet):
     ViewSet for posts
     
     list: Get all posts
-    create: Create a new post
+    create: Create a new post (requires authentication)
     retrieve: Get a specific post
-    update: Update a post
-    partial_update: Partially update a post
-    destroy: Delete a post
+    update: Update a post (requires authentication and ownership)
+    partial_update: Partially update a post (requires authentication and ownership)
+    destroy: Delete a post (requires authentication and ownership)
     """
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+    def get_permissions(self):
+        """
+        Instantiate and return the list of permissions that this view requires.
+        """
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+        return [permission() for permission in permission_classes]
     
     def get_queryset(self):
         queryset = Post.objects.select_related(
@@ -360,16 +369,25 @@ class CommentViewSet(viewsets.ModelViewSet):
     ViewSet for comments
     
     list: Get all comments
-    create: Create a new comment
+    create: Create a new comment (requires authentication)
     retrieve: Get a specific comment
-    update: Update a comment
-    partial_update: Partially update a comment
-    destroy: Delete a comment
+    update: Update a comment (requires authentication and ownership)
+    partial_update: Partially update a comment (requires authentication and ownership)
+    destroy: Delete a comment (requires authentication and ownership)
     """
     queryset = Comment.objects.select_related(
         'post', 'author', 'author__profile', 'parent'
     ).all()
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+    def get_permissions(self):
+        """
+        Instantiate and return the list of permissions that this view requires.
+        """
+        if self.action in ['create', 'update', 'partial_update', 'destroy']:
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+        return [permission() for permission in permission_classes]
     
     def get_serializer_class(self):
         if self.action == 'create':
@@ -497,14 +515,23 @@ class ShareViewSet(viewsets.ModelViewSet):
     ViewSet for shares
     
     list: Get all shares
-    create: Share a post
+    create: Share a post (requires authentication)
     retrieve: Get a specific share
-    destroy: Unshare a post
+    destroy: Unshare a post (requires authentication and ownership)
     """
     queryset = Share.objects.select_related(
         'user', 'user__profile', 'post', 'post__author'
     ).all()
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    
+    def get_permissions(self):
+        """
+        Instantiate and return the list of permissions that this view requires.
+        """
+        if self.action in ['create', 'destroy']:
+            permission_classes = [permissions.IsAuthenticated]
+        else:
+            permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+        return [permission() for permission in permission_classes]
     
     def get_serializer_class(self):
         if self.action == 'create':

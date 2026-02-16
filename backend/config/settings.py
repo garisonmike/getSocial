@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,11 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-default-key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = ["*"]
+# ALLOWED_HOSTS configuration
+ALLOWED_HOSTS = os.environ.get(
+    'ALLOWED_HOSTS',
+    'localhost,127.0.0.1,[::1]'
+).split(',')
 
 
 # Application definition
@@ -45,6 +50,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'graphene_django',
     'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
 
     # Local Apps
     'apps.users',
@@ -90,9 +97,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = "config.asgi.application"
 
-
-import dj_database_url
-
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
@@ -107,8 +111,12 @@ DATABASES = {
     }
 }
 
+# Override with DATABASE_URL if provided (for production deployments)
 if os.environ.get('DATABASE_URL'):
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default'] = dj_database_url.config(
+        conn_max_age=600,
+        ssl_require=os.environ.get('DB_SSL_REQUIRE', 'False') == 'True'
+    )
 
 
 # Password validation
@@ -173,8 +181,9 @@ GRAPHENE = {
 # Django REST Framework Configuration
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',  # JWT for API
+        'rest_framework.authentication.SessionAuthentication',  # Session for browsable API
+        'rest_framework.authentication.BasicAuthentication',  # Basic for testing
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
@@ -189,6 +198,17 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ],
+}
+
+# JWT Configuration
+from datetime import timedelta
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=7),
+    'ROTATE_REFRESH_TOKENS': True,
+    'BLACKLIST_AFTER_ROTATION': True,
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }
 
 # CORS Configuration
