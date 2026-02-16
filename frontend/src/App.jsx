@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Login from './pages/Login'
 import Profile from './pages/Profile'
 import Register from './pages/Register'
+import SocialFeedPage from './pages/SocialFeedPage'
 
 function App() {
     return (
@@ -12,6 +13,7 @@ function App() {
             <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="feed" element={<Feed />} />
+                <Route path="social" element={<SocialFeedPage />} />
                 <Route path="profile/:username" element={<Profile />} />
                 <Route path="login" element={<Login />} />
                 <Route path="register" element={<Register />} />
