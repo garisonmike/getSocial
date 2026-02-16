@@ -126,7 +126,7 @@ class Post(models.Model):
         ]
 
     def __str__(self):
-        return f"Post {self.id} by {self.author.username}"
+        return f"Post {self.pk} by {self.author.username}"
 
 
 class Comment(models.Model):
@@ -164,7 +164,7 @@ class Comment(models.Model):
         ]
 
     def __str__(self):
-        return f"Comment {self.id} by {self.author.username}"
+        return f"Comment {self.id} by {self.author.username}" # pyright: ignore[reportAttributeAccessIssue]
 
     @property
     def is_reply(self):
@@ -213,7 +213,7 @@ class Like(models.Model):
 
     def __str__(self):
         target = self.post if self.post else self.comment
-        return f"{self.user.username} likes {self.content_type} {target.id}"
+        return f"{self.user.username} likes {self.content_type} {target.id}" # type: ignore
 
 
 class Share(models.Model):
@@ -240,4 +240,4 @@ class Share(models.Model):
         ]
 
     def __str__(self):
-        return f"{self.user.username} shared post {self.post.id}"
+        return f"{self.user.username} shared post {self.post.pk}"

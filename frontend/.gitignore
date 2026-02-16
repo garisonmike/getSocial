@@ -1,0 +1,341 @@
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+- **RabbitMQ Management**: http://localhost:15673
+
+### Create Admin User
+
+```bash
+# In a new terminal
+docker-compose exec web python manage.py createsuperuser
+```
+
+### Access the Application
+
+1. **Frontend**: Open http://localhost:3000
+2. **Login**: Use the credentials you just created
+3. **Start posting!**
+
+---
+
+## 📁 Project Structure
+
+```
+getSocial/
+├── backend/                 # Django REST Framework API
+│   ├── apps/
+│   │   ├── core/           # Core models & API
+│   │   ├── users/          # User authentication
+│   │   ├── posts/          # Posts app
+│   │   ├── interactions/   # Likes, comments
+│   │   └── analytics/      # Analytics
+│   ├── config/             # Django settings
+│   └── manage.py
+├── frontend/               # React + Vite + Tailwind
+│   ├── src/
+│   │   ├── components/    # React components
+│   │   ├── pages/         # Page components
+│   │   ├── services/      # API services
+│   │   └── store/         # State management
+│   ├── public/
+│   └── index.html
+├── docker-compose.yml      # Docker orchestration
+├── nginx/                  # Nginx config
+└── k8s/                   # Kubernetes configs
+```
+
+---
+
+## 🛠️ Tech Stack
+
+### Backend
+- **Django 4.2** - Web framework
+- **Django REST Framework** - API
+- **PostgreSQL** - Database
+- **Redis** - Caching & sessions
+- **Celery** - Task queue
+- **Channels** - WebSockets
+- **GraphQL** - Alternative API
+
+### Frontend
+- **React 18** - UI library
+- **Vite** - Build tool
+- **Tailwind CSS** - Styling
+- **React Router** - Routing
+- **Axios** - HTTP client
+- **Zustand** - State management
+
+### Infrastructure
+- **Docker** - Containerization
+- **Docker Compose** - Local development
+- **Nginx** - Reverse proxy
+- **Kubernetes** - Production orchestration
+
+---
+
+## 🎯 Features
+
+### User Features
+- ✅ User registration and authentication
+- ✅ User profiles with avatars and bios
+- ✅ Follow/unfollow users
+- ✅ Privacy settings (public/followers/private)
+
+### Post Features
+- ✅ Create posts with text, images, and videos
+- ✅ Like/unlike posts
+- ✅ Comment on posts with nested replies
+- ✅ Share posts
+- ✅ View engagement metrics
+
+### Feed Features
+- ✅ Personalized feed from followed users
+- ✅ Post visibility controls
+- ✅ Real-time updates (via signals)
+- ✅ Pagination
+
+---
+
+## 🔧 Development Setup
+
+### Backend Only
+
+```bash
+cd backend
+
+# Create virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run migrations
+python manage.py migrate
+
+# Create superuser
+python manage.py createsuperuser
+
+# Start server
+python manage.py runserver
+```
+
+Backend will be available at http://localhost:8000
+
+### Frontend Only
+
+```bash
+cd frontend
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+Frontend will be available at http://localhost:3000
+
+### Environment Variables
+
+Create a `.env` file in the backend directory:
+
+```env
+DEBUG=1
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgresql://user:password@localhost:5432/dbname
+REDIS_URL=redis://localhost:6379/0
+CELERY_BROKER_URL=amqp://guest:guest@localhost:5672//
+```
+
+---
+
+## 📚 API Documentation
+
+### Base URL
+```
+http://localhost:8000/api/
+```
+
+### Key Endpoints
+
+#### Posts
+- `POST /api/posts/` - Create a post
+- `GET /api/posts/feed/` - Get personalized feed
+- `POST /api/posts/{id}/like/` - Like a post
+- `POST /api/posts/{id}/unlike/` - Unlike a post
+- `GET /api/posts/{id}/comments/` - Get post comments
+
+#### Profiles
+- `GET /api/profiles/me/` - Get current user's profile
+- `PATCH /api/profiles/{id}/` - Update profile
+- `GET /api/profiles/{id}/followers/` - Get followers
+- `GET /api/profiles/{id}/following/` - Get following
+
+#### Follows
+- `POST /api/follows/` - Follow a user
+- `POST /api/follows/unfollow/` - Unfollow a user
+
+#### Comments
+- `POST /api/comments/` - Create a comment
+- `POST /api/comments/{id}/like/` - Like a comment
+
+For complete API documentation, see [backend/apps/core/API_DOCUMENTATION.md](backend/apps/core/API_DOCUMENTATION.md)
+
+---
+
+## 🐳 Docker Commands
+
+### Start Services
+```bash
+docker-compose up
+```
+
+### Stop Services
+```bash
+docker-compose down
+```
+
+### View Logs
+```bash
+docker-compose logs -f
+docker-compose logs -f web      # Backend only
+docker-compose logs -f frontend # Frontend only
+```
+
+### Rebuild Services
+```bash
+docker-compose up --build
+```
+
+### Run Migrations
+```bash
+docker-compose exec web python manage.py migrate
+```
+
+### Create Superuser
+```bash
+docker-compose exec web python manage.py createsuperuser
+```
+
+### Access Django Shell
+```bash
+docker-compose exec web python manage.py shell
+```
+
+---
+
+## 🧪 Testing
+
+### Backend Tests
+```bash
+cd backend
+pytest
+```
+
+### Frontend Tests
+```bash
+cd frontend
+npm test
+```
+
+---
+
+## 📱 Usage Examples
+
+### Create a Post (cURL)
+```bash
+curl -X POST http://localhost:8000/api/posts/ \
+  -u username:password \
+  -H "Content-Type: application/json" \
+  -d '{
+    "content": "Hello, getSocial!",
+    "visibility": "public"
+  }'
+```
+
+### Get Feed (cURL)
+```bash
+curl -X GET http://localhost:8000/api/posts/feed/ \
+  -u username:password
+```
+
+### Like a Post (cURL)
+```bash
+curl -X POST http://localhost:8000/api/posts/1/like/ \
+  -u username:password
+```
+
+---
+
+## 🚀 Production Deployment
+
+### Using Docker
+
+1. Update `docker-compose.prod.yml`
+2. Set production environment variables
+3. Deploy:
+
+```bash
+docker-compose -f docker-compose.prod.yml up -d
+```
+
+### Using Kubernetes
+
+```bash
+kubectl apply -f k8s/
+```
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
+
+---
+
+## 📄 License
+
+MIT License - see LICENSE file for details
+
+---
+
+## 📞 Support
+
+For issues and questions:
+- Create an issue on GitHub
+- Check the documentation
+- Contact the team
+
+---
+
+## 🎉 Credits
+
+Built with ♥ by the getSocial team
